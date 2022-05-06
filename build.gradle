@@ -1,8 +1,8 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.20'
-    id 'com.github.johnrengelman.shadow' version "7.1.2"
+    id "org.jetbrains.kotlin.kapt" version '1.6.10'
+    id 'io.micronaut.library' version '3.4.0'
     id 'maven-publish'
-    id 'java'
 }
 
 group = 'com.dew'
@@ -13,13 +13,13 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.micronaut:micronaut-core:3.4.1'
-    implementation 'io.micronaut:micronaut-context:3.4.1'
     implementation 'org.testcontainers:testcontainers:1.16.3'
     implementation 'org.testcontainers:mongodb:1.16.3'
     implementation 'org.testcontainers:junit-jupiter:1.16.3'
 
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
+
+    compileOnly 'org.graalvm.nativeimage:svm'
 }
 
 java {
@@ -45,4 +45,9 @@ compileKotlin {
 
 compileTestKotlin {
     kotlinOptions.jvmTarget = '1.8'
+}
+
+graalvmNative.toolchainDetection = false
+micronaut {
+    version = "3.1.1"
 }
